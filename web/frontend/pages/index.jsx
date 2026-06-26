@@ -54,7 +54,7 @@ export default function HomePage() {
                   value={announcementText}
                   onChange={setAnnouncementText}
                   autoComplete="off"
-                  placeholder="e.g., Free shipping on orders over $50!"
+                  placeholder="eg. Sale 50% Off"
                 />
               </div>
 
