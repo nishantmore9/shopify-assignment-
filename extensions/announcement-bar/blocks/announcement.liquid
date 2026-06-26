@@ -1,0 +1,38 @@
+{% if shop.metafields.my_app.announcement != blank %}
+  <div class="my-app-floating-banner" style="
+    background-color: {{ block.settings.background_color }}; 
+    color: {{ block.settings.text_color }}; 
+    text-align: center; 
+    padding: 12px; 
+    font-weight: bold;
+    width: 100%; 
+    z-index: 9999;">
+    
+    {{ shop.metafields.my_app.announcement }}
+    
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement",
+  "target": "section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    }
+  ]
+}
+{% endschema %}
