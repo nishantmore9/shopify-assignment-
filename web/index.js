@@ -6,7 +6,9 @@ import serveStatic from "serve-static";
 import mongoose from "mongoose";
 import Announcement from "./models/announcement.model.js"
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({
+  path: '../.env'
+});
 
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
@@ -37,8 +39,12 @@ app.post(
 );
 
 // DB connection
-//const mongoURI = 'mongodb+srv://admin:More123@cluster0.ivtqemn.mongodb.net/?appName=Cluster0'
-const mongoURI = process.env.MONGO_URI || "mongodb+srv://admin:More123@cluster0.ivtqemn.mongodb.net/?appName=Cluster0";
+const mongoURI = process.env.MONGO_URI;
+
+if (!mongoURI) {
+  // If it's missing, stop the app or throw an error
+  throw new Error("FATAL: Database URI is missing!");
+}
 
 mongoose.connect(mongoURI)
   .then(() => console.log("Successfully connected to MongoDB"))
