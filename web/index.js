@@ -127,27 +127,24 @@ app.post("/api/announcement", async(req, res) => {
       }
     `;
 
-    const response = await client.query({
-      data: {
-        query: mutation,
-        variables: {
-          metafields: [
-            {
-              namespace: "my_app",
-              key: "announcement",
-              type: "single_line_text_field",
-              value: text,
-              ownerId: shopId
-            }
-          ]
-        }
-      }
+    const response = await client.request(mutation, {
+      variables: {
+        metafields: [
+          {
+            namespace: "my_app",
+            key: "announcement",
+            type: "single_line_text_field",
+            value: text,
+            ownerId: shopId,
+          },
+        ],
+      },
     });
 
-    /** @type {any} */
-    const responseBody = response?.body;
+    // /** @type {any} */
+    // const responseBody = response?.body;
   
-    const userErrors = responseBody?.data?.metafieldsSet.userErrors;
+    const userErrors = response.data.metafieldsSet.userErrors;
 
     if (userErrors && userErrors.length > 0) {
       console.error("Shopify Metafield Error:", userErrors);
