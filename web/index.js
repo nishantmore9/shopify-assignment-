@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 dotenv.config({
   path: '../.env'
 });
-
+import { restResources } from "@shopify/shopify-api/rest/admin/2024-10";
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import PrivacyWebhookHandlers from "./privacy.js";

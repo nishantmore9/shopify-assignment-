@@ -1,37 +1,42 @@
-{% if shop.metafields.my_app.announcement != blank %}
-  <div class="my-app-floating-banner" style="
-    background-color: {{ block.settings.background_color }}; 
-    color: {{ block.settings.text_color }}; 
-    text-align: center; 
-    padding: 12px; 
-    font-weight: bold;
-    width: 100%; 
-    z-index: 9999;">
-    
-    {{ shop.metafields.my_app.announcement }}
-    
-  </div>
+{% assign announcement = shop.metafields.my_app.announcement.value %}
+
+{% if announcement != blank %}
+
+<div
+  style="
+    background: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    text-align:center;
+    padding:12px;
+    font-weight:bold;
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:9999;
+  "
+>
+📢 {{ announcement }}
+</div>
+
 {% endif %}
 
 {% schema %}
 {
-  "name": "Announcement",
-  "target": "section",
-  "enabled_on": {
-    "templates": ["*"]
-  },
+  "name": "Announcement Bar",
+  "target": "body",
   "settings": [
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background Color",
+      "label": "Background",
       "default": "#000000"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text Color",
-      "default": "#FFFFFF"
+      "label": "Text",
+      "default": "#ffffff"
     }
   ]
 }
