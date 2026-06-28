@@ -31,7 +31,7 @@ const STATIC_PATH =
 const app = express();
 
 // Public check for Render
-app.get("/", (_req, res) => {
+app.get("/shopify", (_req, res) => {
   res.status(200).json({
     message: "Shopify app is running!"
   })
