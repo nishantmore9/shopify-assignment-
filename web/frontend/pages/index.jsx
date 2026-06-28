@@ -21,18 +21,18 @@ export default function HomePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: announcementText }),
       });
-      
+
       const data = await response.json();
 
       if (response.ok) {
-        setStatusText("✅ Success! Announcement saved to Database and Shopify.");
-        setAnnouncementText(""); 
+        setStatusText("Success! Announcement saved to Database and Shopify.");
+        setAnnouncementText("");
       } else {
-        setStatusText(`❌ Error: ${data.error}`);
+        setStatusText(`Error: ${data.error}`);
       }
     } catch (error) {
       console.error("Failed to save:", error);
-      setStatusText("❌ A network error occurred.");
+      setStatusText("A network error occurred.");
     } finally {
       setIsSaving(false);
     }
@@ -47,7 +47,7 @@ export default function HomePage() {
               <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
                 Announcement
               </h2>
-            
+
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
                   label="Announcement Text"
@@ -59,12 +59,12 @@ export default function HomePage() {
               </div>
 
               <Button primary loading={isSaving} onClick={handleSave}>
-                Save 
+                Save
               </Button>
 
               {statusText && (
                 <div style={{ marginTop: "1.5rem" }}>
-                  <Banner tone={statusText.includes("❌") ? "critical" : "success"}>
+                  <Banner tone={statusText.includes("Error") ? "critical" : "success"}>
                     <p>{statusText}</p>
                   </Banner>
                 </div>
