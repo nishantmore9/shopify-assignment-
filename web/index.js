@@ -30,6 +30,13 @@ const STATIC_PATH =
 
 const app = express();
 
+// Public check for Render
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    message: "Shopify app is running!"
+  })
+});
+
 // Set up Shopify authentication and webhook handling
 app.get(shopify.config.auth.path, shopify.auth.begin());
 app.get(
@@ -89,18 +96,18 @@ app.post("/api/products", async (_req, res) => {
   res.status(status).send({ success: status === 200, error });
 });
 
-// Add the new announcement route here
-app.post("/api/announcement", async(req, res) => {
+// announcement route
+app.post("/api/announcement", async (req, res) => {
   try {
     const session = res.locals.shopify.session;
     const shop = session.shop;
     const { text } = req.body;
-    if(!text){
+    if (!text) {
       return res.status(400).json({
         error: "Announcement text is required."
       })
     }
-    const newAnnouncement = new Announcement({ shop , text});
+    const newAnnouncement = new Announcement({ shop, text });
     await newAnnouncement.save();
     console.log(`Saved "${text}" to MongoDB for ${shop}`);
 
@@ -145,9 +152,6 @@ app.post("/api/announcement", async(req, res) => {
       },
     });
 
-    // /** @type {any} */
-    // const responseBody = response?.body;
-  
     const userErrors = response.data.metafieldsSet.userErrors;
 
     if (userErrors && userErrors.length > 0) {
@@ -155,9 +159,9 @@ app.post("/api/announcement", async(req, res) => {
       return res.status(400).json({ error: "Failed to update Shopify Metafield" });
     }
 
-    res.status(200).json({ 
-      success: true, 
-      message: "Announcement successfully synced!" 
+    res.status(200).json({
+      success: true,
+      message: "Announcement successfully synced!"
     });
 
   } catch (error) {

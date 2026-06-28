@@ -2,7 +2,7 @@
 
 client_id = "94d8d579b7b2a4f4fa7d9a7400386b22"
 name = "my-app"
-application_url = "https://example.com"
+application_url = "https://shopify-assignment.onrender.com"
 embedded = true
 
 [access_scopes]
@@ -10,11 +10,10 @@ embedded = true
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://shopify-assignment.onrender.com/api/auth/callback" ]
 
 [webhooks]
 api_version = "2026-07"
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
